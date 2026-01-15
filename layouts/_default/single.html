@@ -3,7 +3,8 @@
 <link rel="stylesheet" href="{{.Site.Params.staticPath}}/css/single.css">
 
 <!-- fontawesome -->
-<script defer src="{{.Site.Params.staticPath}}/fontawesome-6/all-6.4.2.js"></script>
+{{ $fontawesomeBundle := resources.Get "fontawesome-6/all-6.4.2.js" | minify | fingerprint }}
+<script src="{{ $fontawesomeBundle.RelPermalink }}" integrity="{{ $fontawesomeBundle.Data.Integrity }}"></script>
 {{ end }}
 
 {{ define "title" }}
@@ -44,6 +45,16 @@
       </div>
       <div class="col-sm-12 col-md-12 col-lg-3">
         <div id="stickySideBar" class="sticky-sidebar">
+
+          {{ if .Params.summaryForLLM | default true}}
+          <aside class="summary-for-llm">
+            <h5>
+              Summary For LLM
+            </h5>
+            <p > {{ .Params.summary }}</p>
+          </aside>
+          {{ end }}
+
           {{ if .Params.toc | default true}}
           <aside class="toc">
               <h5>
@@ -97,6 +108,7 @@
             </div>
           </aside>
           {{ end }}
+
         </div>
       </div>
     </div>
@@ -115,7 +127,8 @@
 <div class="progress">
   <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
-<Script src="{{.Site.Params.staticPath}}/js/scrollProgressBar.js"></script>
+{{ $scrollProgressBarBundle := resources.Get "js/scrollProgressBar.js" | minify | fingerprint }}
+<script src="{{ $scrollProgressBarBundle.RelPermalink }}" integrity="{{ $scrollProgressBarBundle.Data.Integrity }}"></script>
 {{ end }}
 
 <script>
@@ -148,7 +161,8 @@
 </script>
 
 {{ if or (.Site.Params.singlePages.readTime.enable | default true) (.Params.enableReadingTime) }}
-<script src="{{.Site.Params.staticPath}}/js/readingTime.js"></script>
+{{ $readingTimeBundle := resources.Get "js/readingTime.js" | minify | fingerprint }}
+<script src="{{ $readingTimeBundle.RelPermalink }}" integrity="{{ $readingTimeBundle.Data.Integrity }}"></script>
 {{end}}
 
 {{ end }}

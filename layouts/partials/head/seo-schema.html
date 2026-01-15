@@ -1,0 +1,40 @@
+{{ if .IsPage }}
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": {{ .Title | jsonify }},
+    "description": {{ .Params.description | plainify | jsonify }},
+    "summary": {{ .Params.summary | plainify | jsonify }},
+    "image": {{ if .Params.featured_image }}{{ .Params.featured_image | absURL | jsonify }}{{ else }}{{ "images/default-tech-bg.jpg" | absURL | jsonify }}{{ end }},
+    "author": {
+    "@type": "Person",
+    "name": {{ .Site.Params.author | default "Onur Özkir" | jsonify }},
+    "url": {{ .Site.BaseURL | jsonify }}
+    },
+    "keywords": {{ if .Params.tags }}{{ delimit .Params.tags ", " | jsonify }}{{ else }}"Software, Development, Tech"{{ end }},
+    "datePublished": {{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | jsonify }},
+    "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | jsonify }},
+    "proficiencyLevel": "Intermediate",
+    "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink | jsonify }}
+    },
+    "articleBody": {{ .Content | plainify | truncate 500 | jsonify }}
+    }
+</script>
+{{ else }}
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": {{ .Site.BaseURL | jsonify }},
+    "name": {{ .Site.Title | jsonify }},
+    "author": {
+    "@type": "Person",
+    "name": {{ .Site.Params.author | default "Onur Özkir" | jsonify }}
+    },
+    "description": {{ .Site.Params.description | default "Onur Özkir | Software Development Blog" | jsonify }}
+    }
+</script>
+{{ end }}

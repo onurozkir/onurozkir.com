@@ -125,7 +125,7 @@ params:
     menus:
       disableAbout: false
       disableExperience: false
-      disableEducation: false
+      disableEducation: true
       disableProjects: true
       disableAchievements: true
       disableContact: true
@@ -135,7 +135,7 @@ params:
     enable: true
     intro: "Merhaba, Benim adım"
     title: "Onur."
-    subtitle: "Yazılım geliştirme alakalı bir şeyler düşünüyorum."
+    subtitle: "Yazılım geliştirme ile alakalı bir şeyler düşünüyorum"
     content: ""
     image: /images/main.jpeg
     bottomImage:
@@ -204,8 +204,8 @@ params:
             info:
               content: Şirketin uzaktan çalışma düzeninden ofise geçiş modeli sebebiyle ayrıldım.
             content: |
-              Monolith mimariden, ölçeklenebilir microservis mimarisine dönüşüme öncülük ettim. Temel ve ileri altyapı geliştirmelerinde görev aldım.
-              - Resilince  bir microservice mimarisi içinde Iddaa Bülteni, Kupon Yönetimi, Dinamik Kampanya Yönetimi, Editör Yönetimi ve Streaming hizmetleri gibi yüksek performanslı modüllerin mimarisini ve geliştirilmesini sağladım.
+              Monolith mimariden, ölçeklenebilir microservice mimarisine dönüşüme öncülük ettim. Temel ve ileri altyapı geliştirmelerinde görev aldım.
+              - Resilience bir microservice mimarisi içinde Iddaa Bülteni, Kupon Yönetimi, Dinamik Kampanya Yönetimi, Editör Yönetimi ve Streaming hizmetleri gibi yüksek performanslı modüllerin mimarisini ve geliştirilmesini sağladım.
               - High capacity ve sync bir trafiği yönetmeye, logging ve monitor işlemlerini tam yapmaya, design ve pattern seçenekleri doğru uygulamaya ve servislerin ayakta kalmasına uğraştım.
               - Code review, system architecture, Bug find&fixed, Agile günlük rutinlerimden
 
@@ -218,8 +218,8 @@ params:
             content: Bir sonraki firmamdan daha iyi teklif ve challenge aldığım için ayrıldım.
           content: |
             Türkiye'nin en büyük ve en yüksek trafiğe sahip e-ticaret platformunda satıcı etkileşimini doğrudan etkileyen ürün yönetimi için CRM araçlarının geliştirilmesinde bulundum.
-            - Sorunsuz bir kullanıcı deneyimi oluşturmak için micro-frontend, micro-serivce ve BFF design uyguladım.
-            - NodeJS (NestJS), Java, PostgreSQL ve CouchDB kullanarak bir micro-service mimarisi içinde Scalable servisler oluşturdum ve ayakta tutmay açalıştım.
+            - Sorunsuz bir kullanıcı deneyimi oluşturmak için micro-frontend, micro-service ve BFF design uyguladım.
+            - NodeJS (NestJS), Java, PostgreSQL ve CouchDB kullanarak bir micro-service mimarisi içinde Scalable servisler oluşturdum ve ayakta tutmaya çalıştım.
             - React ve React Native kullanarak mobil ve web geliştirmelerinde bulundup Full-stack çalıştım.
             - Code review, system architecture, Bug find&fixed, Agile günlük rutinlerimden
 
@@ -232,7 +232,7 @@ params:
             content: Bir sonraki firmamdan daha iyi aldığım ve daha büyük bir firma olduğu için ayrıldım.
           content: |
             Güvenli finansal işlemleri kolaylaştırmak için kapsamlı bir "Banking as a Service" (BaaS) platformunda çalıştım.
-            - Birden fazla banka entegrasyonlarını düzenlemek ve micro-servisler arasındaki trafiği yönetmek için merkezi bir "API Gateway" geliştirmesinde çalıştım.
+            - Birden fazla banka entegrasyonlarını düzenlemek ve micro-serviceler arasındaki trafiği yönetmek için merkezi bir "API Gateway" geliştirmesinde çalıştım.
             - Otomasyon, güvenlik ve bankalar arası bağlantıya odaklanarak NodeJS, Java, Puppeteer ve .NET Core kullanarak temel finansal uygulamalar geliştirdim.
             - Native olarak Android uygulama geliştirmesinde bulundum (ParaPlus).
 
@@ -244,14 +244,14 @@ params:
           info:
             content: Öğreneceğimi öğrendiğimi düşündüm ve yeni maceralar aramak için ayrıldım.
           content: |
-            onolith odaklı bir ortamda toplu taşıma ve otomatik ücret toplama sistemlerinin tam döngülü (IOT - Backend - Database - Frontend) geliştirilmesine katkıda bulundum.
+            Monolith odaklı bir ortamda toplu taşıma ve otomatik ücret toplama sistemlerinin tam döngülü (IOT - Backend - Database - Frontend) geliştirilmesine katkıda bulundum.
 
             - Node.js, Java ve PHP kullanarak donanım entegrasyonu ve mobil uygulama servisleri geliştirdim.
             - Yüksek hacimli ulaşım verileri için PL/SQL ve MySQL kullanarak karmaşık veritabanı işlemlerini ve sorgu optimizasyonlarını yönettim.
             - Gerçek zamanlı veri görselleştirmeyi sağlayarak AngularJS/Angular kullanarak frontend uygulamaları oluşturdum ve bakımını yaptım.
   # Education
   education:
-    enable: true
+    enable: false
     title: "Eğitim"
     index: false
     items:
@@ -354,12 +354,12 @@ params:
     btnLink: mailto:onurozkir@hotmail.com
     email: onurozkir@hotmail.com
     phone: 554 781 86 00
-    # formspree:
-    #   enable: true # `contact.email` value will be ignored
-    #   formId: abcdefgh # Take it from your form's endpoint, like 'https://formspree.io/f/abcdefgh'
-    #   emailCaption: "Enter your email address"
-    #   messageCaption: "Enter your message here"
-    #   messageRows: 5
+    formspree:
+      enable: false # `contact.email` value will be ignored
+      formId: abcdefgh # Take it from your form's endpoint, like 'https://formspree.io/f/abcdefgh'
+      emailCaption: "Enter your email address"
+      messageCaption: "Enter your message here"
+      messageRows: 5
 
   footer:
     recentPosts:

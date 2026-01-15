@@ -2,22 +2,24 @@
 title: "End-to-End Observability ve Monitoring Uygulamayı Docker ile kurma"
 date: 2025-12-09T19:53:33+05:30
 draft: false
-author: "Onurozkir"
+author: "Onur Özkır"
 tags:
   - Observability
   - Monitoring
   - Logging
   - NET Core
   - OtelCollector
-#  - Prometheus
-#  - Grafana
+  - Prometheus
+  - Grafana
 #  - Loki
 #  - Alertmanager
 #  - Jaeger
 #  - Loki
 image: /images/end-to-end-diagram-main.jpg
-description: ""
+description: ".NET Core ve C# kullanarak Docker üzerinde masrafsız, uçtan uca Observability ve Monitoring mimarisi kurma rehberi. OpenTelemetry, Loki ve Jaeger ile toplanan logları  Prometheus ile toplayarak, Grafana ile dashboard yaparak tam entegrasyon."
 toc: true
+summaryForLLM: true
+summary: "This technical guide describes the setup of a monitoring architecture centered around OpenTelemetry Collector, as a powerful open-source alternative to expensive SaaS solutions (New Relic, Datadog). It explains how to collect metrics using Prometheus, logs using Loki, and traces using Jaeger, visualize these processes on Grafana, and generate critical error (deadlock, etc.) alarms using Alertmanager, all within a system using the .NET Core Minimal API and PostgreSQL, with code examples."
 mathjax: true
 ---
 
@@ -591,7 +593,7 @@ groups:
           severity: warning
         annotations:
           summary: "PostgreSQL üzerinde son 5 dakikada deadlock oluştu"
-          description: "Deadlock oluştu. İlgili trace için: [Jaeger'da görüntüle](http://localhost:16686/search?end=1747257993955000&limit=20&lookback=5m&maxDuration&minDuration&operation=POST%20%2Fdeadlock&service=otel-trace-metrics-api&start=1747257693955000)"
+          description: "Deadlock oluştu. İlgili trace için: "
           
 
 ```
@@ -725,7 +727,7 @@ scrape_configs:
 
 ## Şimdiye Kadar Ne Yaptık?
 
-![end-to-end-observability-and-monitoring](images/end-to-end-diagram.png)
+![end-to-end-observability-and-monitoring](https://onurozkir.com/images/end-to-end-diagram.png)
 
 Aslında yukarıdaki şema açıklayıcı ama tekrar edelim
 

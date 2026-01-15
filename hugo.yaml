@@ -117,7 +117,7 @@ params:
     showBrandLogo: false # Show brand logo in nav bar | default is true
     brandName: "Onur ÖZKIR | Software Developer" # Brand name for the brand | default is the title variable
     disableSearch: false
-    # searchPlaceholder: "Search"
+    searchPlaceholder: "Yazı Ara"
     stickyNavBar:
       enable : true
       showOnScrollUp : true
@@ -353,7 +353,7 @@ params:
     btnName: Mail me
     btnLink: mailto:onurozkir@hotmail.com
     email: onurozkir@hotmail.com
-    phone: 554 781 86 00
+    phone: +90 554 781 86 00
     formspree:
       enable: false # `contact.email` value will be ignored
       formId: abcdefgh # Take it from your form's endpoint, like 'https://formspree.io/f/abcdefgh'

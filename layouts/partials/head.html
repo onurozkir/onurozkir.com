@@ -46,9 +46,8 @@
 {{ $bundle := $styles | resources.Concat "css/bundle.css" }}
 
 {{ $finalStyle := $bundle | minify | fingerprint }}
-
-<link rel="stylesheet" href="{{ $finalStyle.RelPermalink }}" integrity="{{ $finalStyle.Data.Integrity }}" media="all">
-
+<link rel="preload" href="{{ $finalStyle.RelPermalink }}" as="style">
+<link rel="stylesheet" href="{{ $finalStyle.RelPermalink }}" integrity="{{ $finalStyle.Data.Integrity }}" media="all" >
 
 <!-- Internal templates -->
 {{ template "_internal/google_analytics.html" . }}

@@ -58,7 +58,7 @@
 
 {{ if not (.Site.Params.navbar.disableSearch | default false) }}
 {{ $searchBundle := resources.Get "js/search.js" | minify | fingerprint }}
-<script src="{{ $searchBundle.RelPermalink }}" integrity="{{ $searchBundle.Data.Integrity }}"></script>
+<script src="{{ $searchBundle.RelPermalink }}" integrity="{{ $searchBundle.Data.Integrity }}" defer></script>
 {{ end }}
 
 

@@ -4,7 +4,7 @@
 
 <!-- fontawesome -->
 {{ $fontawesomeBundle := resources.Get "fontawesome-6/all-6.4.2.js" | minify | fingerprint }}
-<script src="{{ $fontawesomeBundle.RelPermalink }}" integrity="{{ $fontawesomeBundle.Data.Integrity }}"></script>
+<script src="{{ $fontawesomeBundle.RelPermalink }}" integrity="{{ $fontawesomeBundle.Data.Integrity }}" defer></script>
 {{ end }}
 
 {{ define "title" }}
@@ -162,7 +162,7 @@
 
 {{ if or (.Site.Params.singlePages.readTime.enable | default true) (.Params.enableReadingTime) }}
 {{ $readingTimeBundle := resources.Get "js/readingTime.js" | minify | fingerprint }}
-<script src="{{ $readingTimeBundle.RelPermalink }}" integrity="{{ $readingTimeBundle.Data.Integrity }}"></script>
+<script src="{{ $readingTimeBundle.RelPermalink }}" integrity="{{ $readingTimeBundle.Data.Integrity }}" defer></script>
 {{end}}
 
 {{ end }}

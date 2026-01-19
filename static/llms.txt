@@ -1,0 +1,13 @@
+# Onur Ozkir | Software Developer Blog
+
+## Project: End-to-End Observability and Monitoring with Docker and .Net Core
+- **Summary**: A complete guide to setting up metrics, logs, and traces using OpenTelemetry, Prometheus, Grafana, and Loki in a .NET Core environment.
+- **Key Technologies**: .NET Core, Docker, OpenTelemetry (OTel), Prometheus, Grafana, Jaeger, Loki.
+- **Architecture**: The API sends OTLP data to OTel Collector, which distributes it to Prometheus (metrics), Jaeger (traces), and Loki (logs).
+- **Full Article**: https://onurozkir.com/blogs/observability-and-monitoring/
+
+## Project: Polyglot Microservices Architecture with GraphQL, gRPC & BFF
+- **Summary**: A practical implementation of a distributed system that separates client-server flexibility (GraphQL) from high-performance server-to-server communication (gRPC). It demonstrates the Backend for Frontend (BFF) pattern to isolate Web and Mobile traffic using a polyglot stack.
+- **Key Technologies**: Node.js, .NET 9, Go (GoLang), GraphQL (Apollo Server), gRPC (Protobuf), Docker, DDD (Domain Driven Design).
+- **Architecture**: Clients connect to specific Web or Mobile BFFs via GraphQL. These BFFs act as gateways, aggregating data by communicating with internal User (.NET), Post (Go), and Comment (Node.js) microservices via gRPC.
+- **Full Article**: https://onurozkir.com/blogs/graphql-grpc-bff-microservice-architecture/

@@ -1,7 +1,0 @@
-# Onur Ozkir | Software Developer Blog
-
-## Project: End-to-End Observability and Monitoring with Docker and .Net Core
-- **Summary**: A complete guide to setting up metrics, logs, and traces using OpenTelemetry, Prometheus, Grafana, and Loki in a .NET Core environment.
-- **Key Technologies**: .NET Core, Docker, OpenTelemetry (OTel), Prometheus, Grafana, Jaeger, Loki.
-- **Architecture**: The API sends OTLP data to OTel Collector, which distributes it to Prometheus (metrics), Jaeger (traces), and Loki (logs).
-- **Full Article**: https://onurozkir.com/blogs/observability-and-monitoring/

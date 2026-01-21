@@ -1,0 +1,6 @@
+{{ if .Site.Config.Services.GoogleAnalytics.ID }}
+
+<noscript><iframe src="[https://www.googletagmanager.com/ns.html?id={{ .Site.Config.Services.GoogleAnalytics.ID }}](https://www.googletagmanager.com/ns.html?id={{ .Site.Config.Services.GoogleAnalytics.ID }})"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+{{ end }}

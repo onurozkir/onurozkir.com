@@ -14,10 +14,10 @@ outputs:
 
 enableRobotsTXT: true
 
-#services:
-  #googleAnalytics:
-    #id: G-MEASUREMENT_ID
-  #disqus:
+services:
+  googleAnalytics:
+    id: GTM-5N6FWSFB
+#  disqus:
     #shortname: your-disqus-shortname
 
 pagination:

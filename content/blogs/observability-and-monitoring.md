@@ -23,8 +23,6 @@ summary: "This technical guide describes the setup of a monitoring architecture 
 mathjax: true
 ---
 
-# End-to-End Observability ve Monitoring Uygulamayı Docker ile kurma
-
 Bu yazıda dağıtık veya monolith sistemlerde olmazsa olmaz dediğimiz, End-to-End mimari tasarımlarda bazen unutulan ama unutmayanların ilk 3’te saydığı, AI sistemlerin ise “bana baştan sonra uygulama yap” promptu girildiğinde AI’nin bile unuttuğu kritik bir konuyu ele alacağız. **End-to End Observability ve Monitoring**.
 
 Bir zamanlar, profesyonel hayatta **Newrelic ve Datadog** kullanarak yaptığım Monitoring işlemlerini “Parası az bir start-up” olsa nasıl yapılacağını düşündüm. Çünkü Newrelic’in “yorucu” fiyatlamasını ve sürekli kafasına göre değiştirilen arayüzü çoğu kişiyi de yorabilirdi. Tamamen açık kaynak uygulamalarla tüm uygulamayı izleyecek mimariyi zaman zaman kafamda oluşturdum ve en son yazıya ve koda dökebildim.  Hatta bunu profesyonel hayatımda da ufak bir projede kullanabildim. Sıra bildiklerimi anlatmaya geldi. Aşağıda “**Ne Nedir?**” ile başlayıp bir demo ile bitirmeyi umuyorum. İyi okumalar.

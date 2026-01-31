@@ -9,6 +9,6 @@
 
 ## build
 ````bash
-hugo --minify --baseURL "https://onurozkir.com/"
+hugo --minify --gc --baseURL "https://onurozkir.com/"
 
 ````

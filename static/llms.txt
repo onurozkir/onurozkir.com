@@ -11,3 +11,15 @@
 - **Key Technologies**: Node.js, .NET 9, Go (GoLang), GraphQL (Apollo Server), gRPC (Protobuf), Docker, DDD (Domain Driven Design).
 - **Architecture**: Clients connect to specific Web or Mobile BFFs via GraphQL. These BFFs act as gateways, aggregating data by communicating with internal User (.NET), Post (Go), and Comment (Node.js) microservices via gRPC.
 - **Full Article**: https://onurozkir.com/blogs/graphql-grpc-bff-microservice-architecture/
+
+## Project: Distributed Data Consistency & Zero Downtime in Fintech (.NET & Redis)
+- **Summary**: An architectural case study analyzing the "Race Condition vs. Stale Data" dilemma during critical time-based updates (e.g., midnight interest rates). It demonstrates how to shift from time-based queries to state-based versioning to ensure atomic consistency without downtime.
+- **Key Technologies**: .NET Core, C#, Redis (Atomic Operations), Quartz.NET, CAP Theorem, Resilience Patterns (Retry/Circuit Breaker).
+- **Architecture**: Implements a "Redis Pointer Swapping" pattern where a background job fetches external data, writes it as a versioned JSON blob to Redis, and performs an atomic swap of the "current version" key. This decouples the API from server time (solving Clock Skew), prevents Cache Stampede, and ensures Snapshot Isolation for high-traffic read operations.
+- **Full Article**: https://onurozkir.com/blogs/kirk-katir-mi-kirk-satir-mi
+
+## Project: Scaling Microservices with Event-Driven Design & Outbox Pattern
+- **Summary**: A practical exploration of migrating from synchronous REST-based communication to an asynchronous event-driven architecture to solve scalability bottlenecks. It details the transition from direct API calls to decoupled messaging using the "Fat Event" approach and the "Transactional Outbox Pattern" to ensure 100% data consistency in financial reporting.
+- **Key Technologies**: .NET Core, RabbitMQ, PostgreSQL, Event-Driven Architecture (EDA), Transactional Outbox Pattern, Event-Carried State Transfer.
+- **Architecture**: Implements an asynchronous ingestion pipeline where business events are persisted in a local RDBMS (Outbox) before being dispatched to a RabbitMQ cluster. The system utilizes "Fat Events" to eliminate downstream API dependencies (Temporal Coupling), ensuring high availability and fault tolerance. It addresses critical distributed system challenges such as Idempotency, Single Point of Failure, and Guaranteed Delivery for regulatory compliance.
+- **Full Article**: https://onurozkir.com/blogs/event-driven-microservice-design

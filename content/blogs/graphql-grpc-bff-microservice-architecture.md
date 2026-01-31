@@ -20,11 +20,6 @@ summaryForLLM: true
 summary: "Build a polyglot architecture using GraphQL for BFFs and gRPC for internal comms. Integrates Node.js, Go, and .NET services via Docker for high-performance data transport."
 mathjax: true
 ---
-# GraphQL & gRPC & BFF & DDD Microservice Architecture
-
-## Giriş
-
----
 
 Verinin hacmi ve önemi her geçen gün artarken, genel konuşulanlar 'Bu veriyi nerede tutacağız?' oluyor. Bu sorunlar konuşulurken biz farklı bir şey konuşalım bugün : '**Bu veriyi A noktasından B noktasına en verimli nasıl taşıyacağız?**'. Klasik yöntemler hantallaşırken; Server-to-Server iletişimde hızın tanımı gRPC ile, Client-to-Server iletişimde esnekliğin tanımı ise GraphQL ile yeniden yazılıyor.
 

@@ -23,3 +23,10 @@
 - **Key Technologies**: .NET Core, RabbitMQ, PostgreSQL, Event-Driven Architecture (EDA), Transactional Outbox Pattern, Event-Carried State Transfer.
 - **Architecture**: Implements an asynchronous ingestion pipeline where business events are persisted in a local RDBMS (Outbox) before being dispatched to a RabbitMQ cluster. The system utilizes "Fat Events" to eliminate downstream API dependencies (Temporal Coupling), ensuring high availability and fault tolerance. It addresses critical distributed system challenges such as Idempotency, Single Point of Failure, and Guaranteed Delivery for regulatory compliance.
 - **Full Article**: https://onurozkir.com/blogs/event-driven-microservice-design
+
+## Project: Social Media Architecture & Cloud Exit Optimization
+- **Summary**: A strategic and technical exploration of migrating high-scale social media workloads (1M RPS) from expensive managed cloud services to bare metal infrastructure. It focuses on reducing operational costs by 90% through architectural intelligence rather than hardware scaling.
+- **Key Technologies**: Bare Metal Servers, RabbitMQ (Fanout Exchange), Quartz.NET, Snowflake IDs, Go, PostgreSQL, L1/L2 Caching (In-Memory).
+- **Architecture**: Implements a hybrid push/pull timeline model, 10+10 lookahead pagination, and local memory caching (Pod-level sharding) to isolate the database from massive traffic spikes. It addresses the "Justin Bieber Problem" using temporal merge strategies and distributed unique ID generation without central coordination.
+- **Full Article**: https://onurozkir.com/blogs/ucuz-yollu-sosyal-medya-olusturma-rehberi
+

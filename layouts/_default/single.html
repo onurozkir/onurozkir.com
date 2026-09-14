@@ -1,6 +1,7 @@
 {{ define "head" }}
 <meta name="description" content="{{ .Params.description }}">
-<link rel="stylesheet" href="{{.Site.Params.staticPath}}/css/single.css">
+{{ $singleCSS := resources.Get "css/single.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $singleCSS.RelPermalink }}" integrity="{{ $singleCSS.Data.Integrity }}">
 
 <!-- fontawesome -->
 {{ $fontawesomeBundle := resources.Get "fontawesome-6/all-6.4.2.js" | minify | fingerprint }}
@@ -24,7 +25,10 @@
                 {{ .Params.author }}
                 <small>|</small>
               {{ end }}
-              {{ .Date.Format (.Site.Params.datesFormat.article | default "Jan 2, 2006") }}
+              <time datetime="{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}">{{ .PublishDate.Format (.Site.Params.datesFormat.article | default "Jan 2, 2006") }}</time>
+              {{ if gt .Lastmod .PublishDate }}
+                <small>| Güncellendi: <time datetime="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Lastmod.Format (.Site.Params.datesFormat.article | default "Jan 2, 2006") }}</time></small>
+              {{ end }}
 
               {{ if or (.Site.Params.singlePages.readTime.enable | default true) (.Params.enableReadingTime) }}
               <span id="readingTime">
@@ -35,7 +39,7 @@
           </div>
           {{ if .Params.image }}
           <div class="featured-image">
-            <img class="img-fluid mx-auto d-block" src="{{ .Params.image }}" alt="{{ .Title }}">
+            <img class="img-fluid mx-auto d-block" src="{{ .Params.image }}" alt="{{ .Params.imageAlt | default .Title }}">
           </div>
           {{ end }}
           <article class="page-content  p-2">
@@ -46,16 +50,16 @@
       <div class="col-sm-12 col-md-12 col-lg-3">
         <div id="stickySideBar" class="sticky-sidebar">
 
-          {{ if .Params.summaryForLLM | default true}}
+          {{ if and .Params.summary (ne .Params.summaryForLLM false) }}
           <aside class="summary-for-llm">
             <h5>
-              Summary For LLM
+              Kısa özet
             </h5>
             <p > {{ .Params.summary }}</p>
           </aside>
           {{ end }}
 
-          {{ if .Params.toc | default true}}
+          {{ if ne .Params.toc false }}
           <aside class="toc">
               <h5>
                 {{ .Site.Params.terms.toc | default "Table Of Contents" }}

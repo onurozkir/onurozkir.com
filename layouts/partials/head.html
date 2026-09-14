@@ -55,6 +55,13 @@
 {{ template "_internal/google_analytics.html" . }}
 {{ template "_internal/opengraph.html" . }}
 {{ template "_internal/twitter_cards.html" . }}
+{{/* Existing posts use image (singular); Hugo's social templates use images. */}}
+{{ if and .Params.image (not .Params.images) }}
+<meta property="og:image" content="{{ .Params.image | absURL }}">
+<meta property="og:image:alt" content="{{ .Params.imageAlt | default .Title }}">
+<meta name="twitter:image" content="{{ .Params.image | absURL }}">
+<meta name="twitter:image:alt" content="{{ .Params.imageAlt | default .Title }}">
+{{ end }}
 
 
 <style>

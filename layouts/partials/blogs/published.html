@@ -1,0 +1,8 @@
+{{- /* Keep drafts, scheduled and expired posts out even in preview builds. */ -}}
+{{- $pages := slice -}}
+{{- range where .Site.RegularPages "Section" "blogs" -}}
+  {{- if and (not .Draft) (not .PublishDate.IsZero) (le .PublishDate now) (or .ExpiryDate.IsZero (gt .ExpiryDate now)) -}}
+    {{- $pages = $pages | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return ($pages.ByDate.Reverse) -}}

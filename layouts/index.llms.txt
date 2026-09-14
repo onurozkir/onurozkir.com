@@ -1,0 +1,19 @@
+# Onur Özkır — Teknik Blog
+
+> Yazılım geliştirme, dağıtık sistemler, yazılım mimarisi ve yapay zekâ üzerine Türkçe yazılar.
+
+Yazar: Onur Özkır. Her yazının Markdown sürümü tam metni ve asıl HTML adresini içerir. Özetler yazının yerine geçmez; teknik iddiaları yazıdaki kaynaklar, varsayımlar ve sürümlerle birlikte değerlendirin.
+
+## Site
+
+- [Yazar ve projeler]({{ .Site.BaseURL }}): Onur Özkır'ın kişisel sitesi.
+- [Blog arşivi]({{ "blogs/" | absURL }}): Yayınlanmış yazılar.
+- [RSS]({{ "blogs/index.xml" | absURL }}): Yeni yazıları takip edin.
+- [Tam metin derlemesi]({{ "llms-full.txt" | absURL }}): Yayınlanmış bütün blog yazıları; tek bir konu için aşağıdaki bağlantıları tercih edin.
+
+## Yazılar
+{{ range partial "blogs/published.html" . }}
+{{- $url := .Permalink -}}
+{{- with .OutputFormats.Get "Markdown" }}{{ $url = .Permalink }}{{ end }}
+- [{{ .Title | replaceRE `[\[\]\r\n]` " " }}]({{ $url }}): {{ .Description | default .Summary | plainify | htmlUnescape | replaceRE `\s+` " " }}
+{{ end }}

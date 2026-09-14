@@ -1,4 +1,11 @@
-{{/*
-    You can add further theme extensions or customizations here if they should
-    appear in <head>.
-*/}}
+{{ with .OutputFormats.Get "HTML" }}
+<link rel="canonical" href="{{ .Permalink }}">
+{{ end }}
+<link rel="describedby" type="text/plain" href="{{ "llms.txt" | absURL }}">
+{{ with .OutputFormats.Get "Markdown" }}
+<link rel="alternate" type="text/markdown" title="Markdown" href="{{ .Permalink }}">
+{{ end }}
+{{ with .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .Permalink }}">
+{{ end }}
+{{ if or .Draft (eq .Kind "404") }}<meta name="robots" content="noindex, nofollow">{{ end }}

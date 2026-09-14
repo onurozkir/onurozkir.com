@@ -25,3 +25,7 @@ hugo.linux
 .hugo_build.lock
 
 .prettierignore
+
+# Python validation tools
+__pycache__/
+*.pyc

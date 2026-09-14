@@ -1,0 +1,5 @@
+{{- $text := printf "# %s\n\nAsıl adres: %s\nYazar: %s\nDil: %s\nYayın: %s\nSon güncelleme: %s\n\n" .Title .Permalink (.Params.author | default .Site.Params.author) .Site.Language.Locale (.PublishDate.Format "2006-01-02T15:04:05Z07:00") (.Lastmod.Format "2006-01-02T15:04:05Z07:00") -}}
+{{- with .Description }}{{ $text = printf "%s%s\n\n" $text . }}{{ end -}}
+{{- with .Params.summary }}{{ $text = printf "%sÖzet: %s\n\n" $text . }}{{ end -}}
+{{- /* Return a string: rendered partial output would HTML-escape code and metadata. */ -}}
+{{- return (printf "%s%s" $text .RawContent) -}}

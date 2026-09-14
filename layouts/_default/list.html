@@ -1,6 +1,7 @@
 {{ define "head" }}
 <meta name="description" content="{{ .Title }} of {{ .Site.Title }}">
-<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/list.css" media="all">
+{{ $listCSS := resources.Get "css/list.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $listCSS.RelPermalink }}" integrity="{{ $listCSS.Data.Integrity }}" media="all">
 {{ end }}
 
 {{ define "title" }}

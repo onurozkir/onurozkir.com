@@ -1,0 +1,8 @@
+# Onur Özkır — Blog tam metinleri
+
+> Yayınlanmış yazıların otomatik derlemesi. Kaynak gösterirken her yazının Asıl adres alanını kullanın.
+{{ range partial "blogs/published.html" . }}
+---
+
+{{ partial "blogs/markdown.txt" . }}
+{{ end }}

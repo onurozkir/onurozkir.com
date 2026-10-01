@@ -333,6 +333,18 @@ params:
     enable: true
     # title: "Custom Name"
     items:
+      - title: AI Cold War
+        content: Evidence-driven US-vs-China AI model rivalry for software tasks. Independent teams plan, challenge, build, and review solutions while human approval and a separate verifier gate the final delivery.
+        image: /images/ai-cold-war.png
+        badges:
+          - "Multi-Agent"
+          - "AI Evaluation"
+          - "LangGraph"
+          - "Python"
+          - "Human-in-the-Loop"
+        links:
+          - icon: fab fa-github
+            url: https://github.com/onurozkir/ai-cold-war
       - title: De-ReVot
         content: Local, full-duplex Turkish-English/French MS Teams translator with zero-shot voice cloning. Realtime ASR + MT + cloned TTS streamed through VB-CABLE on native Windows (Whisper, OPUS-MT, XTTS-v2).
         image: /images/de-revot.png

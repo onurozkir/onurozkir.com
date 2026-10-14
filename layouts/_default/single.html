@@ -27,7 +27,7 @@
               {{ end }}
               <time datetime="{{ .PublishDate.Format "2006-01-02T15:04:05Z07:00" }}">{{ .PublishDate.Format (.Site.Params.datesFormat.article | default "Jan 2, 2006") }}</time>
               {{ if gt .Lastmod .PublishDate }}
-                <small>| Güncellendi: <time datetime="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Lastmod.Format (.Site.Params.datesFormat.article | default "Jan 2, 2006") }}</time></small>
+                <small>| {{ i18n "updated" }}: <time datetime="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Lastmod.Format (.Site.Params.datesFormat.article | default "Jan 2, 2006") }}</time></small>
               {{ end }}
 
               {{ if or (.Site.Params.singlePages.readTime.enable | default true) (.Params.enableReadingTime) }}
@@ -53,7 +53,7 @@
           {{ if and .Params.summary (ne .Params.summaryForLLM false) }}
           <aside class="summary-for-llm">
             <h5>
-              Kısa özet
+              {{ i18n "shortSummary" }}
             </h5>
             <p > {{ .Params.summary }}</p>
           </aside>

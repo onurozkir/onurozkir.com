@@ -1,6 +1,6 @@
-# Onur Özkır — Blog tam metinleri
+# {{ i18n "llmsFullTitle" }}
 
-> Yayınlanmış yazıların otomatik derlemesi. Kaynak gösterirken her yazının Asıl adres alanını kullanın.
+{{ i18n "llmsFullIntro" }}
 {{ range partial "blogs/published.html" . }}
 ---
 

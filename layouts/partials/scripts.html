@@ -57,6 +57,7 @@
 {{- end }}
 
 {{ if not (.Site.Params.navbar.disableSearch | default false) }}
+<script>window.searchIndexUrl = "{{ "index.json" | relLangURL }}";</script>
 {{ $searchBundle := resources.Get "js/search.js" | minify | fingerprint }}
 <script src="{{ $searchBundle.RelPermalink }}" integrity="{{ $searchBundle.Data.Integrity }}" defer></script>
 {{ end }}

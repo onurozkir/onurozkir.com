@@ -176,6 +176,27 @@
                 {{end}}
                 {{end}}
 
+                    {{ if gt (len hugo.Sites) 1 }}
+                    <li class="nav-item navbar-text dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Language">
+                            {{ .Site.Language.Label | default .Site.Language.Lang }}
+                        </a>
+                        <div class="dropdown-menu shadow-lg rounded" aria-labelledby="languageDropdown">
+                            {{ $page := . }}
+                            {{ range hugo.Sites }}
+                            {{ $lang := .Language.Lang }}
+                            {{ $url := .Home.RelPermalink }}
+                            {{ range $page.AllTranslations }}{{ if eq .Site.Language.Lang $lang }}{{ $url = .RelPermalink }}{{ end }}{{ end }}
+                            <a class="dropdown-item text-center nav-link{{ if eq $lang $page.Site.Language.Lang }} active{{ end }}"
+                               href="{{ $url }}" hreflang="{{ .Language.Locale | default $lang }}">
+                                {{ .Language.Label | default $lang }}
+                            </a>
+                            {{ end }}
+                        </div>
+                    </li>
+                    {{ end }}
+
                     {{ if (not .Site.Params.theme.disableThemeToggle | default false) }}
                     <li class="nav-item navbar-text">
                         <!-- darkmode mode toggle -->

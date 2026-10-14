@@ -23,7 +23,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix="blog-pipeline-", dir=scratch) as directory:
         root = Path(directory).resolve()
         assert root.is_relative_to(scratch.resolve())
-        for name in ("content", "layouts", "assets", "static", "archetypes"):
+        for name in ("content", "layouts", "assets", "static", "archetypes", "i18n"):
             shutil.copytree(repo / name, root / name)
         shutil.copy2(repo / "hugo.yaml", root / "hugo.yaml")
         (root / "themes/hugo-profile").mkdir(parents=True)

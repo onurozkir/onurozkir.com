@@ -1,6 +1,15 @@
 {{ with .OutputFormats.Get "HTML" }}
 <link rel="canonical" href="{{ .Permalink }}">
 {{ end }}
+{{ if gt (len hugo.Sites) 1 }}
+{{- range .AllTranslations }}
+<link rel="alternate" hreflang="{{ .Site.Language.Locale | default .Site.Language.Lang }}" href="{{ .Permalink }}">
+{{- end }}
+{{- $default := index hugo.Sites 0 }}
+{{- $xdefault := $default.Home.Permalink }}
+{{- range .AllTranslations }}{{ if eq .Site.Language.Lang $default.Language.Lang }}{{ $xdefault = .Permalink }}{{ end }}{{ end }}
+<link rel="alternate" hreflang="x-default" href="{{ $xdefault }}">
+{{ end }}
 <link rel="describedby" type="text/plain" href="{{ "llms.txt" | absURL }}">
 {{ with .OutputFormats.Get "Markdown" }}
 <link rel="alternate" type="text/markdown" title="Markdown" href="{{ .Permalink }}">

@@ -1,9 +1,164 @@
 baseURL: "https://onurozkir.com/"
-locale: "tr-TR"
 defaultContentLanguage: "tr"
+defaultContentLanguageInSubdir: false
 timeZone: "Europe/Istanbul"
 title: "Onur ÖZKIR | Software Developer"
 theme: hugo-profile
+
+languages:
+  tr:
+    label: "Türkçe"
+    locale: "tr-TR"
+    weight: 1
+    menus:
+      main:
+        - identifier: blog
+          name: Blog
+          title: Blog posts
+          pageRef: /blogs
+          weight: 1
+  en:
+    label: "English"
+    locale: "en-US"
+    weight: 2
+    title: "Onur ÖZKIR | Software Developer"
+    menus:
+      main:
+        - identifier: blog
+          name: Blog
+          title: Blog posts
+          pageRef: /blogs
+          weight: 1
+    params:
+      description: "Onur Özkır's technical blog about software architecture, distributed systems and artificial intelligence. Code examples, experiences and engineering decisions."
+      navbar:
+        searchPlaceholder: "Search posts"
+      hero:
+        intro: "Hi, my name is"
+        title: "Onur."
+        subtitle: "I think about things related to software development"
+      about:
+        title: "About Me"
+        content: |-
+          Hi, I was born in Eskişehir, grew up in İzmir and now live in Manisa. I'm over 35, have completed my military service, present myself well, and I'm married with one son.
+
+          For more than 10 years I've been writing code and designing architecture with passion. These days I work at Etiya as a Principal Software Developer.
+
+          I've solved, still solve and keep solving problems in fintech, e-commerce, betting, telecom and public transport — everywhere a mistake is expensive, where people spend money, or where they are trying to get somewhere on time. I'm the guy who wrestles with those "scalable" systems that keep high-traffic sites alive.
+        skills:
+          title: "Below is the food in my tech bag; to add new ones I try to learn at night after putting my kid to sleep."
+          items:
+            - "JavaScript / NodeJS / Express / TypeScript"
+            - "React/React Native"
+            - "C# / .Net "
+            - "RabbitMQ / Kafka"
+            - "PHP"
+            - "Docker / Kubernetes"
+            - "PLSQL / PostgreSQL / MySQL / MongoDB / Redis / CouchBase"
+            - "A little Python"
+            - "A tiny bit of GoLang"
+            - "Java"
+            - "MVC / OOP / Design Pattern / Driven Design / SOLID"
+            - "Software Architecture"
+      experience:
+        title: "Work Experience"
+        items:
+          - company: "Etiya"
+            companyUrl: "https://www.linkedin.com/company/etiya/"
+            jobs:
+              - name: "Principal Software Developer"
+                date: "December 2025 - Present"
+                content: "I currently work remotely as a 'Principal Software Developer'. I implement the requirements of the largest Canada-based telecom company. We use Angular on the frontend, Java on the backend and PostgreSQL as the database. Code review, system architecture and bug finding & fixing are part of my daily routine."
+          - company: "Nesine.com"
+            companyUrl: "https://www.linkedin.com/company/nesine/"
+            jobs:
+              - name: "Senior Software Developer"
+                date: "February 2023 - December 2025"
+                info:
+                  content: I left because the company moved from a remote-working setup to an office-based model.
+                content: |
+                  I led the transformation from a monolithic architecture to a scalable microservice architecture. I took part in core and advanced infrastructure development.
+                  - Within a resilient microservice architecture I designed and developed high-performance modules such as the Iddaa Bulletin, Coupon Management, Dynamic Campaign Management, Editor Management and Streaming services.
+                  - I worked on managing high-capacity and sync traffic, doing logging and monitoring thoroughly, applying design and pattern choices correctly, and keeping the services alive.
+                  - Code review, system architecture, bug finding & fixing and Agile routines are part of my daily work.
+          - company: "Trendyol Group"
+            companyUrl: "https://www.linkedin.com/company/trendyolgroup"
+            jobs:
+              - name: "Senior Software Developer"
+                date: "March 2022 - February 2023"
+                info:
+                  content: I left because I received a better offer and more of a challenge from my next company.
+                content: |
+                  I worked on developing CRM tools for product management that directly affect seller interaction on Turkey's largest and highest-traffic e-commerce platform.
+                  - I applied micro-frontend, micro-service and BFF designs to create a seamless user experience.
+                  - I built and worked to keep alive scalable services within a micro-service architecture using NodeJS (NestJS), Java, PostgreSQL and CouchDB.
+                  - I worked full-stack on mobile and web development using React and React Native.
+                  - Code review, system architecture, bug finding & fixing and Agile routines are part of my daily work.
+          - company: "Define-X"
+            companyUrl: "https://www.linkedin.com/company/definex-consulting-technology-labs/"
+            jobs:
+              - name: "Software Developer"
+                date: "September 2021 - March 2022"
+                info:
+                  content: I left because I received a better offer and it was a larger company.
+                content: |
+                  I worked on a comprehensive "Banking as a Service" (BaaS) platform to facilitate secure financial transactions.
+                  - I worked on developing a central "API Gateway" to organize integrations with multiple banks and manage traffic between microservices.
+                  - I developed core financial applications using NodeJS, Java, Puppeteer and .NET Core, focusing on automation, security and inter-bank connectivity.
+                  - I developed a native Android application (ParaPlus).
+          - company: "Kentkart"
+            companyUrl: "https://www.linkedin.com/company/kentkart/posts"
+            jobs:
+              - name: "Software Developer"
+                date: "February 2018 - September 2021"
+                info:
+                  content: I felt I had learned what I could and left to seek new adventures.
+                content: |
+                  I contributed to the full-cycle development (IoT - Backend - Database - Frontend) of public transport and automated fare collection systems in a monolith-oriented environment.
+
+                  - I developed hardware integrations and mobile application services using Node.js, Java and PHP.
+                  - I managed complex database operations and query optimizations using PL/SQL and MySQL for high-volume transit data.
+                  - I built and maintained frontend applications using AngularJS/Angular, enabling real-time data visualization.
+      education:
+        title: "Education"
+        items:
+          - title: "Computer Programming"
+            school:
+              name: "Ege University, İzmir"
+            date: "2014 - 2016"
+            GPA: "3.68 out of 4.0 (Top Scoring Student)"
+            content: |-
+              Graduated
+          - title: "Biology"
+            school:
+              name: "Ege University, İzmir"
+            date: "2009 - 20211"
+            content: |-
+              Frozen (suspended) at the end of the first year.
+          - title: "High School"
+            school:
+              name: "Bornova Mustafa Kemal Anatolian High School, İzmir"
+            date: "2005 - 2009"
+      projects:
+        title: "Projects"
+      contact:
+        title: "Contact"
+        content: I check my email every day. To say hello, or to ask "can I ask you something?", you can reach me by email or social media.
+        btnName: "Mail me"
+      footer:
+        recentPosts:
+          title: "Recent Posts"
+      singlePages:
+        readTime:
+          content: "min read"
+      terms:
+        read: "Read"
+        toc: "Table Of Contents"
+        tags: "Tags"
+        social: "Share"
+        copyright: "All rights reserved"
+        pageNotFound: "Page not found"
+        emailText: "Check out this site"
 
 outputs:
   home:
@@ -58,13 +213,7 @@ markup:
     renderer:
       unsafe: true
 
-Menus:
-  main:
-    - identifier: blog
-      name: Blog
-      title: Blog posts
-      url: /blogs
-      weight: 1
+# Menus are defined per language under `languages.<lang>.menus` above.
 #    - identifier: gallery
 #      name: Gallery
 #      title: Blog posts
@@ -331,7 +480,7 @@ params:
   # projects
   projects:
     enable: true
-    # title: "Custom Name"
+    title: "Projeler"
     items:
       - title: AI Cold War
         content: Evidence-driven US-vs-China AI model rivalry for software tasks. Independent teams plan, challenge, build, and review solutions while human approval and a separate verifier gate the final delivery.
@@ -431,7 +580,7 @@ params:
     socialShare: true
     readTime:
       enable: true
-      content: "min read"
+      content: "dk okuma"
     scrollprogress:
       enable: true
     tags:
@@ -439,11 +588,13 @@ params:
 
   # For translations
   terms:
-    read: "Read"
-    toc: "Table Of Contents"
-    copyright: "All rights reserved"
-    pageNotFound: "Page not found"
-    emailText: "Check out this site"
+    read: "Oku"
+    toc: "İçindekiler"
+    tags: "Etiketler"
+    social: "Paylaş"
+    copyright: "Tüm hakları saklıdır"
+    pageNotFound: "Sayfa bulunamadı"
+    emailText: "Şu siteye göz at"
 
   datesFormat:
     article: "Jan 2, 2006"

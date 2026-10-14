@@ -49,7 +49,7 @@ async function performSearch(evt) {
       searchButtonPosition.left + "px";
 
     try {
-      let response = await fetch("/index.json");
+      let response = await fetch(window.searchIndexUrl || "/index.json");
       if (!response.ok) {
         throw new Error("Failed to fetch search data");
       }

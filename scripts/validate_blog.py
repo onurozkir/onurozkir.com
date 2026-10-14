@@ -52,6 +52,27 @@ class Page(HTMLParser):
                 and (media is None or a.get("type") == media)]
 
 
+def collect_sitemap_urls(path, public, seen=None):
+    """Collect page URLs from a sitemap, following a multilingual sitemap index."""
+    seen = seen if seen is not None else set()
+    urls = set()
+    if path in seen or not path.is_file():
+        return urls
+    seen.add(path)
+    try:
+        root = ET.fromstring(path.read_text(encoding="utf-8"))
+    except ET.ParseError:
+        return urls
+    for element in root.iter():
+        if not element.tag.endswith("}loc") or not element.text:
+            continue
+        urls.add(element.text)
+        if element.text.endswith("sitemap.xml"):
+            relative = unquote(urlparse(element.text).path).lstrip("/")
+            urls |= collect_sitemap_urls(public / relative, public, seen)
+    return urls
+
+
 def validate(public):
     public = Path(public).resolve()
     errors = []
@@ -99,8 +120,8 @@ def validate(public):
     for link in index_links:
         check(local(link).is_file(), f"llms.txt target missing: {link}")
 
-    sitemap = ET.fromstring(read("sitemap.xml"))
-    sitemap_urls = {e.text for e in sitemap.iter() if e.tag.endswith("}loc")}
+    check((public / "sitemap.xml").is_file(), "Missing output: sitemap.xml")
+    sitemap_urls = collect_sitemap_urls(public / "sitemap.xml", public)
     rss = ET.fromstring(read("blogs/index.xml"))
     rss_urls = {e.text for e in rss.findall("./channel/item/link")}
     markdown_urls, blog_urls = set(), set()

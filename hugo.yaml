@@ -482,6 +482,19 @@ params:
     enable: true
     title: "Projeler"
     items:
+      - title: Stream Sentry
+        content: Real-time live stream highlight clipping platform: AI viral moment detection, 9:16 reframing with karaoke subtitles, creator-approved publishing and content protection.
+        image: /images/stream-sentry.png
+        badges:
+          - "AI"
+          - "AI Evaluation"
+          - "Live Streaming"
+          - "FFmpeg"
+          - "Whisper"
+          - "Content Protection"
+        links:
+          - icon: fab fa-github
+            url: https://github.com/onurozkir/stream-sentry
       - title: AI Cold War
         content: Evidence-driven US-vs-China AI model rivalry for software tasks. Independent teams plan, challenge, build, and review solutions while human approval and a separate verifier gate the final delivery.
         image: /images/ai-cold-war.png

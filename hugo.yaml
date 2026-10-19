@@ -483,7 +483,7 @@ params:
     title: "Projeler"
     items:
       - title: Stream Sentry
-        content: Real-time live stream highlight clipping platform: AI viral moment detection, 9:16 reframing with karaoke subtitles, creator-approved publishing.
+        content: "Real-time live stream highlight clipping platform; AI viral moment detection, 9:16 reframing with karaoke subtitles, creator-approved publishing."
         image: /images/stream-sentry.png
         badges:
           - "AI"
@@ -496,7 +496,7 @@ params:
           - icon: fab fa-github
             url: https://github.com/onurozkir/stream-sentry
       - title: AI Cold War
-        content: Evidence-driven US-vs-China AI model rivalry for software tasks. Independent teams plan, challenge, build, and review solutions while human approval and a separate verifier gate the final delivery.
+        content: "Evidence-driven US-vs-China AI model rivalry for software tasks. Independent teams plan, challenge, build, and review solutions while human approval and a separate verifier gate the final delivery."
         image: /images/ai-cold-war.png
         badges:
           - "Multi-Agent"
@@ -508,7 +508,7 @@ params:
           - icon: fab fa-github
             url: https://github.com/onurozkir/ai-cold-war
       - title: De-ReVot
-        content: Local, full-duplex Turkish-English/French MS Teams translator with zero-shot voice cloning. Realtime ASR + MT + cloned TTS streamed through VB-CABLE on native Windows (Whisper, OPUS-MT, XTTS-v2).
+        content: "Local, full-duplex Turkish-English/French MS Teams translator with zero-shot voice cloning. Realtime ASR + MT + cloned TTS streamed through VB-CABLE on native Windows (Whisper, OPUS-MT, XTTS-v2)."
         image: /images/de-revot.png
         badges:
           - "Realtime-Translator"

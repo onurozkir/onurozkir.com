@@ -483,7 +483,7 @@ params:
     title: "Projeler"
     items:
       - title: Stream Sentry
-        content: Real-time live stream highlight clipping platform: AI viral moment detection, 9:16 reframing with karaoke subtitles, creator-approved publishing and content protection.
+        content: Real-time live stream highlight clipping platform: AI viral moment detection, 9:16 reframing with karaoke subtitles, creator-approved publishing.
         image: /images/stream-sentry.png
         badges:
           - "AI"

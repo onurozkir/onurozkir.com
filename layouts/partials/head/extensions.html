@@ -10,7 +10,7 @@
 {{- range .AllTranslations }}{{ if eq .Site.Language.Lang $default.Language.Lang }}{{ $xdefault = .Permalink }}{{ end }}{{ end }}
 <link rel="alternate" hreflang="x-default" href="{{ $xdefault }}">
 {{ end }}
-<link rel="describedby" type="text/plain" href="{{ "llms.txt" | absURL }}">
+<link rel="describedby" type="text/plain" href="{{ "llms.txt" | absLangURL }}">
 {{ with .OutputFormats.Get "Markdown" }}
 <link rel="alternate" type="text/markdown" title="Markdown" href="{{ .Permalink }}">
 {{ end }}

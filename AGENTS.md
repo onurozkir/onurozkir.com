@@ -32,7 +32,7 @@ This repository is Onur Özkır's Hugo-based personal site and Turkish technical
 - Existing Turkish posts are Turkish-only. New posts should be bilingual.
 - Create the Turkish file as usual: `content/blogs/<slug>.md`. Then add the English translation at `content/blogs/<slug>.en.md`. Hugo pairs them automatically by base filename; each gets its own URL (`/blogs/<slug>/`, `/en/blogs/<slug>/`) and they become hreflang alternates of each other.
 - Keep the base filename identical in both files so the pairing works. Do not change an existing slug.
-- The English file follows the same front matter schema; translate `title`, `description`, `summary`, `imageAlt` and the body. Use English tags where a clear equivalent exists and keep technology names as-is.
+- The English file follows the same front matter schema; translate `title`, `description`, `summary`, `imageAlt` and the body. Use English tags in both languages and keep the same tag list across translations; keep technology names as-is.
 - In the Markdown output the labels come from i18n, so the English article automatically gets English labels.
 - Draft state is per file: set `draft: false` only in the file that is actually ready.
 

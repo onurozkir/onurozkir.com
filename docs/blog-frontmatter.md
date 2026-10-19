@@ -10,7 +10,7 @@ Dosya yolu: `content/blogs/<ascii-kebab-case-slug>.md`. YAML front matter `---` 
 | `author` | string | Zorunlu; varsayılan `Onur Özkır`. |
 | `description` | string | Zorunlu; özgün, kısa Türkçe tanıtım. Yaklaşık 140–170 karakter editoryal hedef, teknik zorunluluk değil. |
 | `summary` | string | Zorunlu; konuyu, yaklaşımı ve sınırını anlatan 2–4 cümle. Okuyucuya görünür. |
-| `tags` | string[] | Zorunlu; genellikle 3–6 ilgili etiket. Mevcut yazılardaki adları tercih et. |
+| `tags` | string[] | Zorunlu; konuya uygun İngilizce etiketler kullan. Türkçe ve İngilizce çevirilerde aynı listeyi koru; mevcut etiket adlarını tercih et. |
 | `image` | string | İsteğe bağlı; var olan `/images/...` kapak görseli. |
 | `imageAlt` | string | Kapak varsa yaz; görselin ne anlattığını tarif et. |
 | `toc` | boolean | Varsayılan `true`; kısa yazıda kapatılabilir. |
@@ -21,9 +21,13 @@ Dosya yolu: `content/blogs/<ascii-kebab-case-slug>.md`. YAML front matter `---` 
 | `expiryDate` | RFC 3339 datetime | İsteğe bağlı yayından kalkma eşiği; o tarihte yeniden build/deploy gerekir. |
 | `slug` | string | Genellikle gereksiz; dosya adından gelir. Mevcut slug'ı değiştirme. |
 | `aliases` | string[] | Yalnızca istenen URL taşımasında eski adresler. |
+| `series` | string | AI Native SWE yazıları için `ai-native-swe`; seri sayfası ve yazıdaki geri bağlantı bu alanı kullanır. |
+| `url` | string | Seri yazısında Türkçe için `/ai-native-swe/<slug>/`, İngilizce için `/en/ai-native-swe/<slug>/`. Kaynaklar yine `content/blogs/<slug>.md` ve `<slug>.en.md` altında kalır. |
 
 Yazı başına `outputs` ekleme; Hugo cascade HTML + Markdown üretir. `featured_image` kullanma; sitenin kapak alanı `image`. Özel SEO keywords veya LLM için ayrı gizli içerik gerekmez. Yeni özel alan eklemeden önce onu okuyan şablon var mı kontrol et.
 
 Kod bloklarında dil etiketi kullan (`csharp`, `go`, `python`, `yaml`, `bash`, `text`). Standart Markdown görsel ve bağlantıları hem HTML hem Markdown çıktısında okunur. Markdown çıktısı ham gövdeyi içerdiğinden editör yorumları dahil yayınlanmayacak notların tamamını kaldır.
+
+AI Native SWE serisinin girişleri `content/ai-native-swe/_index.md` ve `_index.en.md` dosyalarıdır. Seri yazıları genel blog arşivi, arama, RSS ve llms çıktılarında da görünür. Yeni bölümde aynı `series` değerini ve diline uygun `url` alanını kullan; mevcut yazıların adreslerini değiştirme.
 
 Mevcut yazılar geriye uyumluluk için korunmuştur; bu şema geçmiş yazıların teknik iddialarının doğrulandığı anlamına gelmez. Eski yazıyı düzenlerken kaynak/ölçüm gerektiren iddiaları ayrıca gözden geçir.

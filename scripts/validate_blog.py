@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 import re
 import sys
-from urllib.parse import unquote, urlparse
+from urllib.parse import unquote, urljoin, urlparse
 import xml.etree.ElementTree as ET
 
 
@@ -73,8 +73,9 @@ def collect_sitemap_urls(path, public, seen=None):
     return urls
 
 
-def validate(public):
+def validate_language(public, prefix, language_prefixes):
     public = Path(public).resolve()
+    language_root = public / prefix
     errors = []
 
     def check(ok, message):
@@ -82,14 +83,18 @@ def validate(public):
             errors.append(message)
 
     def read(name):
-        path = public / name
+        path = language_root / name
         check(path.is_file(), f"Missing output: {name}")
         return path.read_text(encoding="utf-8") if path.is_file() else ""
 
     index, full = read("llms.txt"), read("llms-full.txt")
-    robots = read("robots.txt")
+    robots = (public / "robots.txt").read_text(encoding="utf-8")
     home = Page(read("index.html"))
-    check(home.lang.startswith("tr"), "Home must declare Turkish")
+    language = "en" if prefix == "en" else "tr"
+    locale = "en-US" if language == "en" else "tr-TR"
+    canonical_label = "Canonical URL" if language == "en" else "Asıl adres"
+    published_label = "Published" if language == "en" else "Yayın"
+    check(home.lang == language, f"{prefix or '/'} home must declare {language}")
     check(any(s.get("@type") == "WebSite" for s in home.schemas), "Home WebSite schema missing")
     home_urls = home.link("canonical")
     check(len(home_urls) == 1, "Home must have one canonical")
@@ -110,11 +115,12 @@ def validate(public):
         for url in page.link("stylesheet") + page.scripts:
             parsed = urlparse(url)
             if not parsed.netloc or parsed.netloc == urlparse(base).netloc:
-                asset = base.rstrip("/") + "/" + url.lstrip("/") if not parsed.netloc else url
+                asset = urljoin(base, url)
                 check(local(asset).is_file(), f"{label}: missing CSS/JavaScript {url}")
 
     check_assets(home, "Home")
-    check("Sitemap: " + base + "sitemap.xml" in robots, "robots sitemap URL mismatch")
+    origin = f"{urlparse(base).scheme}://{urlparse(base).netloc}/"
+    check("Sitemap: " + origin + "sitemap.xml" in robots, "robots sitemap URL mismatch")
     check("Disallow: /" not in robots, "robots blocks crawling")
     index_links = re.findall(r"^- \[[^\n]+?\]\((https?://[^)]+)\)", index, re.M)
     for link in index_links:
@@ -124,20 +130,26 @@ def validate(public):
     sitemap_urls = collect_sitemap_urls(public / "sitemap.xml", public)
     rss = ET.fromstring(read("blogs/index.xml"))
     rss_urls = {e.text for e in rss.findall("./channel/item/link")}
+    def belongs_to_language(path):
+        relative = path.relative_to(public)
+        return prefix or relative.parts[0] not in language_prefixes
+
     markdown_urls, blog_urls = set(), set()
-    for path in sorted((public / "blogs").rglob("index.html")):
+    for path in sorted(language_root.rglob("index.html")):
+        if not belongs_to_language(path):
+            continue
         label = str(path.relative_to(public))
         page = Page(path.read_text(encoding="utf-8"))
-        check_assets(page, label)
         articles = [s for s in page.schemas if s.get("@type") == "BlogPosting"]
         if not articles:
             continue  # Archive/pagination/aliases are not articles.
+        check_assets(page, label)
         check(len(articles) == 1, f"{label}: duplicate article schema")
         schema = articles[0]
         url = schema.get("url", "")
         blog_urls.add(url)
         check(page.h1 == 1, f"{label}: expected one H1")
-        check(page.lang.startswith("tr"), f"{label}: wrong language")
+        check(page.lang == language, f"{label}: wrong language")
         check(page.link("canonical") == [url], f"{label}: canonical mismatch")
         check(page.link("describedby") == [base + "llms.txt"], f"{label}: llms discovery missing")
         check(url in sitemap_urls, f"{label}: absent from sitemap")
@@ -147,7 +159,7 @@ def validate(public):
         check(schema.get("description") == (descriptions[0] if descriptions else ""), f"{label}: schema description mismatch")
         check(bool(schema.get("headline")), f"{label}: missing title")
         check(bool(schema.get("author", {}).get("name")), f"{label}: missing author")
-        check(schema.get("inLanguage") == "tr-TR", f"{label}: schema language mismatch")
+        check(schema.get("inLanguage") == locale, f"{label}: schema language mismatch")
         check(schema.get("mainEntityOfPage", {}).get("@id") == url, f"{label}: schema canonical mismatch")
         dates = []
         for field in ("datePublished", "dateModified"):
@@ -177,22 +189,34 @@ def validate(public):
             continue
         md = md_path.read_text(encoding="utf-8")
         check(md.startswith("# " + schema.get("headline", "") + "\n"), f"{label}: Markdown title corrupted")
-        check("Asıl adres: " + url in md, f"{label}: Markdown canonical missing")
-        check("Yayın: " + schema.get("datePublished", "") in md, f"{label}: Markdown date corrupted")
+        check(canonical_label + ": " + url in md, f"{label}: Markdown canonical missing")
+        check(published_label + ": " + schema.get("datePublished", "") in md, f"{label}: Markdown date corrupted")
         check("{{<" not in md and "{{%" not in md, f"{label}: unrendered Hugo shortcode in Markdown")
         check(md.strip() in full, f"{label}: missing/corrupted full-text entry")
         check(md_url in index_links, f"{label}: not indexed in llms.txt")
 
-    check(bool(blog_urls), "No blog articles found")
     check(rss_urls <= blog_urls, "RSS contains a non-published or missing blog URL")
-    check(bool(rss_urls), "Blog RSS is empty")
+    check(bool(rss_urls) == bool(blog_urls), "Blog RSS publication state differs")
     indexed_md = {url for url in index_links if url.endswith("/index.md")}
     check(indexed_md == markdown_urls, "llms.txt and published Markdown set differ")
-    full_urls = set(re.findall(r"^Asıl adres: (\S+)$", full, re.M))
+    full_urls = set(re.findall(r"^" + re.escape(canonical_label) + r": (\S+)$", full, re.M))
     check(full_urls == blog_urls, "llms-full.txt and published blog set differ")
-    actual_md = {p.resolve() for p in (public / "blogs").rglob("*.md")}
+    actual_md = {p.resolve() for p in language_root.rglob("*.md") if belongs_to_language(p)}
     check(actual_md == {local(u) for u in markdown_urls}, "Unlisted/stale Markdown output found")
     return len(blog_urls), errors
+
+
+def validate(public):
+    public = Path(public).resolve()
+    prefixes = sorted(str(p.parent.relative_to(public)) for p in public.glob("*/llms.txt"))
+    count, errors = 0, []
+    for prefix in ["", *prefixes]:
+        subtotal, failures = validate_language(public, prefix, prefixes)
+        count += subtotal
+        errors.extend(f"{prefix or 'tr'}: {message}" for message in failures)
+    if not count:
+        errors.append("No blog articles found")
+    return count, errors
 
 
 def main():

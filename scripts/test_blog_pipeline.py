@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import tempfile
+import xml.etree.ElementTree as ET
 
 from validate_blog import validate
 
@@ -84,6 +85,75 @@ def main():
                     assert "/pipeline-probe/" not in text, f"{state} leaked into {name}"
                     assert "/archetype-probe/" not in text, f"Scaffold leaked into {name}"
             print(f"PASS: {state}; {count} published articles")
+
+        # Series keep their blog identity while using a separate public URL.
+        filename.unlink()
+        for language in ("tr", "en"):
+            suffix = "" if language == "tr" else ".en"
+            prefix = "" if language == "tr" else "/en"
+            series = root / "content/ai-native-swe"
+            series.mkdir(exist_ok=True)
+            (series / f"_index{suffix}.md").write_text(
+                '---\ntitle: "AI Native SWE"\nseries: "ai-native-swe"\n---\n\nSeries introduction.\n',
+                encoding="utf-8")
+            for state in ("published", "draft", "future", "expired"):
+                fields = {
+                    "title": f"Series {state}", "date": "2020-01-02T12:00:00+03:00",
+                    "draft": state == "draft", "author": "Onur Özkır",
+                    "description": "Series publishing boundary.", "summary": "Series summary.",
+                    "tags": ["Testing"], "series": "ai-native-swe",
+                    "url": f"{prefix}/ai-native-swe/series-{state}/",
+                }
+                if state == "future":
+                    fields["publishDate"] = "2099-01-01T00:00:00+03:00"
+                if state == "expired":
+                    fields["expiryDate"] = "2020-01-03T12:00:00+03:00"
+                fm = "\n".join(f"{k}: {json.dumps(v, ensure_ascii=False)}" for k, v in fields.items())
+                (root / f"content/blogs/series-{state}{suffix}.md").write_text(
+                    "---\n" + fm + "\n---\n\n" + body, encoding="utf-8")
+        output = root / "production-series"
+        run("--minify", "--destination", str(output))
+        for prefix in ("", "en/"):
+            archive = (output / f"{prefix}ai-native-swe/index.html").read_text(encoding="utf-8")
+            article_url = f"/{prefix}ai-native-swe/series-published/"
+            assert f'href={article_url}' in archive or f'href="{article_url}"' in archive, "Series archive omits its articles"
+            assert "Series introduction." in archive, "Series introduction missing"
+            assert "kirk-katir" not in archive.split("<footer>", 1)[0], "Unrelated post leaked into series"
+            html = (output / f"{prefix}ai-native-swe/series-published/index.html").read_text(encoding="utf-8")
+            assert f'/{prefix}ai-native-swe/' in html, "Article omits series navigation"
+            assert f"/{prefix}tags/testing" in html, "Article tags link to the wrong language"
+            md = (output / f"{prefix}ai-native-swe/series-published/index.md").read_text(encoding="utf-8")
+            assert body in md, "Series Markdown body corrupted"
+            search = json.loads((output / f"{prefix}index.json").read_text(encoding="utf-8"))
+            assert any(article_url in item["permalink"] for item in search), "Series article absent from search"
+            rss = (output / f"{prefix}blogs/index.xml").read_text(encoding="utf-8")
+            assert article_url in rss, "Series article absent from blog RSS"
+            feed = ET.parse(output / f"{prefix}ai-native-swe/index.xml")
+            feed_links = [item.text for item in feed.findall("./channel/item/link")]
+            assert f"https://onurozkir.com{article_url}" in feed_links, "Series article absent from series RSS"
+            assert all(f"/{prefix}ai-native-swe/" in link for link in feed_links), "Unrelated article leaked into series RSS"
+            assert not any(f"/series-{state}/" in link for link in feed_links
+                           for state in ("draft", "future", "expired")), "Unpublished article leaked into series RSS"
+            for name in ("llms.txt", "llms-full.txt"):
+                text = (output / f"{prefix}{name}").read_text(encoding="utf-8")
+                assert article_url in text, "Series article absent from discovery"
+                for state in ("draft", "future", "expired"):
+                    assert f"/series-{state}/" not in text, "Unpublished series article leaked"
+        count, errors = validate(output)
+        assert not errors, "\n".join(errors)
+        english_index = output / "en/llms.txt"
+        original = english_index.read_text(encoding="utf-8")
+        english_index.write_text("\n".join(line for line in original.splitlines()
+                                            if "/series-published/" not in line), encoding="utf-8")
+        assert validate(output)[1], "Validator missed an unindexed English series article"
+        english_index.write_text(original, encoding="utf-8")
+        preview = root / "preview-series"
+        run("--buildDrafts", "--buildFuture", "--buildExpired", "--destination", str(preview))
+        for prefix in ("", "en/"):
+            archive = (preview / f"{prefix}ai-native-swe/index.html").read_text(encoding="utf-8").split("<footer>", 1)[0]
+            for state in ("draft", "future", "expired"):
+                assert f"/series-{state}/" not in archive, "Unpublished article leaked into series preview"
+        print(f"PASS: bilingual series routing, archive, discovery, search and publication boundaries; {count} articles")
     print("PASS: archetype, automatic indexing, raw Markdown, publication boundaries and negative validation")
 
 

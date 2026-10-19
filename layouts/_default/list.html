@@ -1,5 +1,5 @@
 {{ define "head" }}
-<meta name="description" content="{{ .Title }} of {{ .Site.Title }}">
+<meta name="description" content="{{ .Description | default (printf "%s of %s" .Title .Site.Title) }}">
 {{ $listCSS := resources.Get "css/list.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $listCSS.RelPermalink }}" integrity="{{ $listCSS.Data.Integrity }}" media="all">
 {{ end }}
@@ -10,25 +10,32 @@
 
 {{ define "main" }}
 <div class="container pt-5" id="list-page">
-    <h2 class="text-center pb-2">{{.Title}}</h2>
+    <h1 class="text-center pb-2">{{.Title}}</h1>
+    {{ with .Content }}<div class="page-content mx-auto mb-4">{{ . }}</div>{{ end }}
+    {{ $pages := .Pages }}
+    {{ with .Params.series }}
+      {{ $pages = where (partial "blogs/published.html" $) "Params.series" . }}
+      {{ $pages = $pages.ByDate }}
+    {{ end }}
+    {{ $paginator := .Paginate $pages }}
     <div class="row">
-        {{ range .Paginator.Pages }}
+        {{ range $paginator.Pages }}
         <div class="col-lg-4 col-md-6 my-3">
             <div class="card-columns">
                 <div class="card h-100">
                     {{ if and (not (.Site.Params.listPages.disableFeaturedImage | default false)) (.Params.image) }}
                     <div class="card-header">
                         <a href="{{ .RelPermalink }}">
-                            <img src="{{ .Params.image }}" class="card-img-top" alt="{{ .Title }}">
+                            <img src="{{ .Params.image }}" class="card-img-top" alt="{{ .Params.imageAlt | default .Title }}" loading="lazy">
                         </a>
                     </div>
                     {{ end }}
                     <div class="card-body bg-transparent p-4 shadow-sm">
                         <a href="{{ .RelPermalink }}" class="primary-font card-title">
-                            <h5 class="card-title bg-transparent" title="{{ .Title }}">{{ .Title | truncate 25 }}</h5>
+                            <h2 class="h5 card-title bg-transparent">{{ .Title }}</h2>
                         </a>
                         <div class="card-text secondary-font">
-                            <p>{{ .Content | truncate 300}}</p>
+                            <p>{{ .Summary | plainify | truncate 300 }}</p>
                         </div>
                     </div>
                     <div class="mt-auto post-footer bg-transparent py-3">

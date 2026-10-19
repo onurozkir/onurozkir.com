@@ -17,6 +17,10 @@ languages:
           title: Blog posts
           pageRef: /blogs
           weight: 1
+        - identifier: ai-native-swe
+          name: AI Native SWE
+          pageRef: /ai-native-swe
+          weight: 2
   en:
     label: "English"
     locale: "en-US"
@@ -29,6 +33,10 @@ languages:
           title: Blog posts
           pageRef: /blogs
           weight: 1
+        - identifier: ai-native-swe
+          name: AI Native SWE
+          pageRef: /ai-native-swe
+          weight: 2
     params:
       description: "Onur Özkır's technical blog about software architecture, distributed systems and artificial intelligence. Code examples, experiences and engineering decisions."
       navbar:

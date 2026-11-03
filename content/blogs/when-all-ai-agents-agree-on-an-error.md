@@ -17,6 +17,8 @@ mathjax: false
 ---
 *Bütün AI agent'lar aynı hatada uzlaşırsa doğruyu kim doğrular?*
 
+> Demo: https://github.com/onurozkir/oracle-gateway
+
 > Bir B2B SaaS şirketinde yazılım geliştirme sürecini tamamen AI agent'larla otomatikleştirdiniz. Planner, Product Owner, Developer, Tester, QA ve DevOps rollerinden oluşan agent workflow'unuz var.
 Sistem TDD (Test-Driven Development) yaklaşımıyla çalışıyor. Planner görevleri tanımlıyor, Tester önce testleri yazıyor, Developer implementasyonu gerçekleştiriyor, QA doğruluyor ve DevOps production'a çıkarıyor.
 Her şey mükemmel görünüyor: Unit testler başarılı, code coverage %98, CI/CD pipeline yeşil. İnsan müdahalesi minimum seviyede.
@@ -165,29 +167,7 @@ Ancak şunu özellikle vurgulamak gerekir:
 
 Burada geliştirme workflow'unu baştan yazmak yerine iki ayrı hat oluştururdum: **Development Lane** ve **Independent Validation Lane**.
 
-```mermaid
-flowchart TD
-    R[Original Business Requirement] --> A[Development Lane]
-    R --> O[Independent Validation Lane]
-
-    A --> P[Planner]
-    P --> T[Tester - TDD]
-    T --> D[Developer]
-    D --> C[Candidate: Code + Agent-Written Tests]
-
-    O --> I[Fresh-Context Interpretation]
-    I --> B[Approved Business Oracle]
-
-    C --> S[Test Sensitivity Check]
-    C --> V[Independent Acceptance Execution]
-    B --> V
-
-    S --> G{Evidence & Release Policy}
-    V --> G
-    G -->|Satisfied| OK[Accept / Controlled Rollout]
-    G -->|Contradiction| NO[Reject]
-    G -->|Ambiguity| H[Escalate / Clarify]
-```
+![Orijinal iş gereksinimi geliştirme ve bağımsız doğrulama hatlarına ayrılır. Test duyarlılığı ve onaylı iş kurallarına göre yürütülen kabul testleri, kabul, ret veya açıklama isteme kararını besler.](/images/independent-verification-flow.svg)
 
 Bu diyagramda üç teknik karar belirleyici:
 

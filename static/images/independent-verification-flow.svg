@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="810" viewBox="0 0 540 810">
+  <title>Independent Verification by Design</title>
+  <desc>The original business requirement feeds development and independent validation. The candidate is checked for test sensitivity and evaluated against an approved business oracle. The evidence and release policy determine whether to accept, reject, or escalate.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#52667c"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="538" height="808" rx="17" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+
+  <g fill="none" stroke="#52667c" stroke-width="2" marker-end="url(#arrow)">
+    <path d="M270 70 V90 H138 V112"/>
+    <path d="M270 70 V90 H402 V112"/>
+    <path d="M138 158 V182"/>
+    <path d="M138 224 V248"/>
+    <path d="M138 290 V314"/>
+    <path d="M138 356 V380"/>
+    <path d="M402 158 V182"/>
+    <path d="M402 234 V262"/>
+    <path d="M138 448 V510"/>
+    <path d="M138 477 H362 V510"/>
+    <path d="M402 320 V510"/>
+    <path d="M138 572 V592 H224 V614"/>
+    <path d="M402 572 V592 H316 V614"/>
+    <path d="M270 662 V684 H98 V698 M270 684 V698 M270 684 H442 V698" marker-end="none"/>
+    <path d="M98 726 V739"/>
+    <path d="M270 726 V739"/>
+    <path d="M442 726 V739"/>
+  </g>
+
+  <g stroke-width="1.5">
+    <g fill="#e2e8f0" stroke="#94a3b8">
+      <rect x="62" y="22" width="416" height="48" rx="9"/>
+      <rect x="97" y="614" width="346" height="48" rx="9"/>
+    </g>
+    <g fill="#e8f1ff" stroke="#7ba5de">
+      <rect x="16" y="112" width="244" height="46" rx="9" fill="#cee1ff"/>
+      <rect x="16" y="182" width="244" height="42" rx="9"/>
+      <rect x="16" y="248" width="244" height="42" rx="9"/>
+      <rect x="16" y="314" width="244" height="42" rx="9"/>
+      <rect x="16" y="380" width="244" height="68" rx="9"/>
+    </g>
+    <g fill="#e5f5f1" stroke="#64a99c">
+      <rect x="280" y="112" width="244" height="46" rx="9" fill="#c9ebe4"/>
+      <rect x="280" y="182" width="244" height="52" rx="9"/>
+      <rect x="280" y="262" width="244" height="58" rx="9"/>
+    </g>
+    <g fill="#fff" stroke="#94a3b8">
+      <rect x="16" y="510" width="244" height="62" rx="9"/>
+      <rect x="280" y="510" width="244" height="62" rx="9"/>
+    </g>
+    <rect x="16" y="739" width="164" height="55" rx="9" fill="#d9f5e5" stroke="#68a98c"/>
+    <rect x="188" y="739" width="164" height="55" rx="9" fill="#fde8e8" stroke="#cb8787"/>
+    <rect x="360" y="739" width="164" height="55" rx="9" fill="#fdf0d5" stroke="#c9a45a"/>
+  </g>
+
+  <g fill="#172b42" font-family="system-ui, sans-serif" font-size="21" text-anchor="middle">
+    <g font-weight="650">
+      <text x="270" y="53">Original Business Requirement</text>
+      <text x="138" y="142">Development Lane</text>
+      <text x="402" y="131" font-size="19">Independent</text>
+      <text x="402" y="151" font-size="19">Validation Lane</text>
+      <text x="270" y="645">Evidence &amp; Release Policy</text>
+    </g>
+    <text x="138" y="210">Planner</text>
+    <text x="138" y="276">Tester (TDD)</text>
+    <text x="138" y="342">Developer</text>
+    <text x="138" y="406">Candidate</text>
+    <text x="138" y="432" font-size="18">Code + Agent-Written Tests</text>
+    <text x="402" y="203">Fresh-Context</text>
+    <text x="402" y="225">Interpretation</text>
+    <text x="402" y="286">Approved</text>
+    <text x="402" y="310">Business Oracle</text>
+    <text x="138" y="548">Test Sensitivity Check</text>
+    <text x="402" y="537">Independent</text>
+    <text x="402" y="561">Acceptance Execution</text>
+    <g font-size="19">
+      <text x="98" y="718">Satisfied</text>
+      <text x="270" y="718">Contradiction</text>
+      <text x="442" y="718">Ambiguity</text>
+      <g font-weight="650">
+        <text x="98" y="762">Accept</text>
+        <text x="98" y="783" font-size="17">Controlled Rollout</text>
+        <text x="270" y="773">Reject</text>
+        <text x="442" y="773">Escalate / Clarify</text>
+      </g>
+    </g>
+  </g>
+</svg>

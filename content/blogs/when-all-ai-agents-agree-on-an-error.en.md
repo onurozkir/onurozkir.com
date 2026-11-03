@@ -18,6 +18,8 @@ mathjax: false
 
 *When all AI agents agree on an error, who verifies the truth?*
 
+> Demo: https://github.com/onurozkir/oracle-gateway
+
 > You have fully automated the software development process at a B2B SaaS company using AI agents. Your agent workflow consists of Planner, Product Owner, Developer, Tester, QA, and DevOps roles.
 The system follows a TDD (Test-Driven Development) approach. The Planner defines tasks, the Tester writes tests first, the Developer implements, QA verifies, and DevOps deploys to production.
 Everything looks perfect: unit tests pass, code coverage is 98%, the CI/CD pipeline is green. Human intervention is at a minimum.
@@ -166,29 +168,7 @@ Two reviewers can arrive at the same incorrect interpretation. Therefore, especi
 
 Here, instead of rewriting the development workflow from scratch, I would create two separate lanes: **Development Lane** and **Independent Validation Lane**.
 
-```mermaid
-flowchart TD
-    R[Original Business Requirement] --> A[Development Lane]
-    R --> O[Independent Validation Lane]
-
-    A --> P[Planner]
-    P --> T[Tester - TDD]
-    T --> D[Developer]
-    D --> C[Candidate: Code + Agent-Written Tests]
-
-    O --> I[Fresh-Context Interpretation]
-    I --> B[Approved Business Oracle]
-
-    C --> S[Test Sensitivity Check]
-    C --> V[Independent Acceptance Execution]
-    B --> V
-
-    S --> G{Evidence & Release Policy}
-    V --> G
-    G -->|Satisfied| OK[Accept / Controlled Rollout]
-    G -->|Contradiction| NO[Reject]
-    G -->|Ambiguity| H[Escalate / Clarify]
-```
+![The original business requirement feeds development and independent validation. Test sensitivity and acceptance against the approved business oracle inform whether to accept, reject, or escalate.](/images/independent-verification-flow.svg)
 
 Three technical decisions are defining in this diagram:
 

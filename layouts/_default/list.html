@@ -13,11 +13,14 @@
     <h1 class="text-center pb-2">{{.Title}}</h1>
     {{ with .Content }}<div class="page-content mx-auto mb-4">{{ . }}</div>{{ end }}
     {{ $pages := .Pages }}
+    {{ $paginator := "" }}
     {{ with .Params.series }}
       {{ $pages = where (partial "blogs/published.html" $) "Params.series" . }}
-      {{ $pages = $pages.ByDate }}
+      {{ $pages = $pages.ByDate.Reverse }}
+      {{ $paginator = $.Paginate $pages 50 }}
+    {{ else }}
+      {{ $paginator = .Paginate $pages }}
     {{ end }}
-    {{ $paginator := .Paginate $pages }}
     <div class="row">
         {{ range $paginator.Pages }}
         <div class="col-lg-4 col-md-6 my-3">

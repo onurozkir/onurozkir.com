@@ -9,13 +9,12 @@ translationKey: "when-all-ai-agents-agree-on-an-error"
 description: "AI agent'larla geliştirilen yazılımlarda testler yeşilken iş kuralları nasıl yanlış olabilir? TDD, test oracle, context isolation ve bağımsız doğrulama üzerine bir system design incelemesi."
 summary: "Multi-agent TDD süreçlerinde bütün agentlar aynı yanlış iş kuralını doğrulayabilir. Bu yazıda test duyarlılığı, oracle doğruluğu ve doğrulama bağımsızlığı kavramlarını ayırıyor; iki hatlı bağımsız doğrulama mimarisi ile Independent Oracle Gateway demo sonuçlarını inceliyorum."
 tags: ["AI Native SWE", "AI", "LLM", "TDD", "AI Verification", "AI Software Quality", "Multi-Agent Systems", "Oracle"]
-image: "images/oracle-verification.png"
+image: "/images/oracle-verification.png"
 imageAlt: "When All AI Agents Agree on an Error, Who Verifies the Truth?"
 toc: true
 summaryForLLM: true
 mathjax: false
 ---
-
 *Bütün AI agent'lar aynı hatada uzlaşırsa doğruyu kim doğrular?*
 
 > Bir B2B SaaS şirketinde yazılım geliştirme sürecini tamamen AI agent'larla otomatikleştirdiniz. Planner, Product Owner, Developer, Tester, QA ve DevOps rollerinden oluşan agent workflow'unuz var.

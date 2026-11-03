@@ -9,7 +9,7 @@ translationKey: "when-all-ai-agents-agree-on-an-error"
 description: "When software is built with AI agents, how can business rules be wrong while tests are green? A system design study on TDD, the test oracle problem, context isolation, and independent verification."
 summary: "In multi-agent TDD workflows, every agent can end up validating the same incorrect business rule. This post separates the concepts of test sensitivity, oracle correctness, and verification independence, and examines an independent verification architecture along with Independent Oracle Gateway demo results."
 tags: ["AI Native SWE", "AI", "LLM", "TDD", "AI Verification", "AI Software Quality", "Multi-Agent Systems", "Oracle"]
-image: "images/oracle-verification.png"
+image: "/images/oracle-verification.png"
 imageAlt: "When All AI Agents Agree on an Error, Who Verifies the Truth?"
 toc: true
 summaryForLLM: true
